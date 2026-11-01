@@ -1,0 +1,20 @@
+# Virtual environments
+venv/
+.venv/
+
+
+# Python artifacts
+*.pyc
+__pycache__/
+
+# Django environment variables and databases
+.env
+db.sqlite3
+
+# Static & Media Assets
+staticfiles/
+media/
+
+
+
+

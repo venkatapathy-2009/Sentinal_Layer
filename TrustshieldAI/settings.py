@@ -11,21 +11,40 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+import environ
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env(
+    DEBUG=(bool, False)  # Safely falls back to False if missing in production
+)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
+# 2. Safely read the local .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
+# 3. Pull settings cleanly from the environment
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG')
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-s)l313^*6^)r7#rd=*776pp@w$j)ad7ew59lgqj92_xmz41#*v'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
+# settings.py
+
+# Load allowed frontend origins from environment variables as a list
+CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
+    'http://localhost:3000',      # React/Next.js default local port
+    'http://127.0.0.1:3000',
+])
+
+# If your frontend needs to send cookies/tokens over cross-site requests
+CORS_ALLOW_CREDENTIALS = True
+
+
 
 
 # Application definition
@@ -75,12 +94,9 @@ WSGI_APPLICATION = 'TrustshieldAI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
-
+# Database Configuration
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': env.db('DATABASE_URL'),
 }
 
 
