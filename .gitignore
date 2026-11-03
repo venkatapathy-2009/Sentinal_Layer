@@ -6,6 +6,7 @@ venv/
 # Python artifacts
 *.pyc
 __pycache__/
+.env
 
 # Django environment variables and databases
 .env/
