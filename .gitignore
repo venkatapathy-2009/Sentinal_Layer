@@ -2,20 +2,19 @@
 venv/
 .venv/
 
+# Environment files
+.env
+.env.local
 
 # Python artifacts
-*.pyc
+*.py[cod]
 __pycache__/
-.env
 
-# Django environment variables and databases
-.env/
-db.sqlite3/
-
-# Static & Media Assets
+# Django
+db.sqlite3
 staticfiles/
 media/
 
-
-
-
+# Node
+node_modules/
+dist/

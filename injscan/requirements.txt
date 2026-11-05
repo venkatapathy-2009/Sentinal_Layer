@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+ollama
+requests
+pydantic
+django
+djangorestframework
+django-cors-headers

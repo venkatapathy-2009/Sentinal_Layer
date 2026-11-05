@@ -1,0 +1,1261 @@
+/* ─── TRUSTSHIELD PRO: APPLE / FIGMA DARK PRECISION THEME ─── */
+
+:root {
+  --bg-canvas: #09090b;
+  --bg-card: #121215;
+  --bg-card-subtle: #18181b;
+  --bg-input: #0d0d10;
+  
+  --border-rim: rgba(255, 255, 255, 0.08);
+  --border-pill: #27272a;
+  --border-active: #3f3f46;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-dim: #52525b;
+  
+  --emerald-green: #22c55e;
+  --emerald-bg: rgba(34, 197, 94, 0.1);
+  --emerald-border: rgba(34, 197, 94, 0.35);
+  
+  --coral-red: #ef4444;
+  --coral-bg: rgba(239, 68, 68, 0.1);
+  --coral-border: rgba(239, 68, 68, 0.35);
+
+  --apple-blue: #0071e3;
+  --amber-orange: #f97316;
+  --amber-border: rgba(249, 115, 22, 0.25);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ─── APP SHELL ─── */
+.ts-app-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-canvas);
+}
+
+/* ─── 1. TOP NAVBAR ─── */
+.ts-header {
+  height: 64px;
+  background: #09090b;
+  border-bottom: 1px solid var(--border-rim);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.ts-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ts-brand-glyph {
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ts-brand-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+}
+
+.ts-brand-divider {
+  color: var(--text-dim);
+  font-weight: 300;
+  margin: 0 2px;
+}
+
+.ts-brand-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* Navbar Center: Shield Capsule */
+.ts-header-center {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.ts-shield-capsule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--emerald-bg);
+  border: 1px solid var(--emerald-border);
+  padding: 5px 8px 5px 14px;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.ts-shield-capsule.inactive {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.ts-shield-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald-green);
+  box-shadow: 0 0 8px var(--emerald-green);
+}
+
+.ts-shield-capsule.inactive .ts-shield-dot {
+  background: var(--coral-red);
+  box-shadow: 0 0 8px var(--coral-red);
+}
+
+.ts-shield-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--emerald-green);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.ts-shield-capsule.inactive .ts-shield-label {
+  color: var(--coral-red);
+}
+
+/* iOS / Apple-style Toggle Switch */
+.ts-toggle-switch {
+  width: 36px;
+  height: 20px;
+  background: #27272a;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.ts-toggle-switch.on {
+  background: var(--emerald-green);
+}
+
+.ts-toggle-thumb {
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  transform: translateX(0);
+}
+
+.ts-toggle-switch.on .ts-toggle-thumb {
+  transform: translateX(16px);
+}
+
+/* DB Connection Indicator */
+.ts-db-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ts-db-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald-green);
+}
+
+/* Navbar Right: User & Sign Out */
+.ts-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ts-user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ts-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #27272a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.ts-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ts-user-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.ts-user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.ts-user-role {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.ts-btn-signout {
+  background: transparent;
+  border: 1px solid var(--border-pill);
+  color: #f4f4f5;
+  border-radius: 9999px;
+  padding: 6px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ts-btn-signout:hover {
+  background: #18181b;
+  border-color: #3f3f46;
+}
+
+/* ─── 2. MAIN LAYOUT ─── */
+.ts-main-content {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 32px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Hero Row */
+.ts-hero-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.ts-hero-title {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  color: #ffffff;
+}
+
+.ts-hero-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.ts-hero-status-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ts-badge-production {
+  background: #18181b;
+  border: 1px solid var(--border-pill);
+  color: var(--text-secondary);
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ts-status-operational {
+  color: var(--emerald-green);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Common Card */
+.ts-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-rim);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* ─── 3. 4 KPI METRIC CARDS ─── */
+.ts-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.ts-metric-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 148px;
+  padding: 20px 22px;
+}
+
+.ts-card-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.ts-metric-value {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: #ffffff;
+  line-height: 1.1;
+  margin: 6px 0 4px;
+}
+
+.ts-metric-trend {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--emerald-green);
+}
+
+.ts-metric-caption {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ts-metric-body-split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Progress Ring */
+.ts-ring-container {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ts-progress-ring {
+  transform: rotate(-90deg);
+}
+
+.ts-progress-ring-circle {
+  transition: stroke-dashoffset 0.5s ease;
+}
+
+.ts-ring-text {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Metric Pills */
+.ts-pills-row {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.ts-metric-pill {
+  background: #18181b;
+  border: 1px solid var(--border-pill);
+  border-radius: 9999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #e4e4e7;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ─── 4. GARAK RED-TEAM PANEL ─── */
+.ts-garak-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-color: var(--amber-border);
+  background: linear-gradient(90deg, rgba(249, 115, 22, 0.03) 0%, rgba(18, 18, 21, 1) 40%);
+}
+
+.ts-garak-left {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ts-garak-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--amber-orange);
+}
+
+.ts-garak-probes {
+  display: flex;
+  gap: 8px;
+}
+
+.ts-probe-tag {
+  background: #18181b;
+  border: 1px solid var(--border-pill);
+  border-radius: 9999px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.ts-garak-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ts-btn-garak-run {
+  background: #16a34a;
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.ts-btn-garak-run:hover:not(:disabled) {
+  background: #22c55e;
+}
+
+.ts-btn-garak-run:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ts-play-glyph {
+  font-size: 11px;
+}
+
+.ts-btn-garak-history {
+  background: transparent;
+  border: 1px solid var(--border-pill);
+  color: #f4f4f5;
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ts-btn-garak-history:hover {
+  background: #18181b;
+  border-color: #3f3f46;
+}
+
+/* ─── 5. LIVE SECURITY TELEMETRY TABLE ─── */
+.ts-table-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ts-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ts-table-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+}
+
+.ts-table-poll-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ts-poll-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald-green);
+  box-shadow: 0 0 6px var(--emerald-green);
+}
+
+/* Toolbar */
+.ts-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ts-filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ts-filter-btn {
+  background: #18181b;
+  border: 1px solid var(--border-pill);
+  color: var(--text-secondary);
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ts-filter-btn:hover {
+  border-color: #3f3f46;
+  color: #ffffff;
+}
+
+.ts-filter-btn.active {
+  background: #27272a;
+  border-color: #3f3f46;
+  color: #ffffff;
+}
+
+.ts-search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ts-search-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-dim);
+}
+
+.ts-search-input {
+  background: #121215;
+  border: 1px solid var(--border-pill);
+  border-radius: 9999px;
+  padding: 8px 16px 8px 36px;
+  font-size: 12px;
+  color: #ffffff;
+  width: 280px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.ts-search-input:focus {
+  border-color: var(--border-active);
+}
+
+.ts-search-input::placeholder {
+  color: var(--text-dim);
+}
+
+/* Table */
+.ts-table-wrapper {
+  overflow-x: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ts-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.ts-table th {
+  padding: 14px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-rim);
+}
+
+.ts-table td {
+  padding: 16px 12px;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+
+.ts-table tr:hover td {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Cells */
+.ts-verdict-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.ts-verdict-badge.blocked {
+  background: var(--emerald-bg);
+  border: 1px solid var(--emerald-border);
+  color: var(--emerald-green);
+}
+
+.ts-verdict-badge.leaked {
+  background: var(--coral-bg);
+  border: 1px solid var(--coral-border);
+  color: var(--coral-red);
+}
+
+.ts-attack-type-badge {
+  background: #18181b;
+  border: 1px solid var(--border-pill);
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: #d4d4d8;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.ts-app-id-cell {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ts-payload-cell {
+  color: #f4f4f5;
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  max-width: 440px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ts-evidence-cell {
+  color: var(--text-muted);
+  font-size: 12px;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ts-timestamp-cell {
+  color: var(--text-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Table Footer */
+.ts-table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+
+.ts-footer-meta {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* ─── 6. DEVELOPER ACCESS MODAL (FIGMA IMAGE 2) ─── */
+.ts-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 40px 24px;
+  overflow-y: auto;
+}
+
+.ts-modal-card {
+  width: 100%;
+  max-width: 440px;
+  background: #141417;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 36px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  position: relative;
+  margin: auto;
+}
+
+.ts-modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: all 0.15s ease;
+}
+
+.ts-modal-close-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ts-modal-icon-badge {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.ts-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  text-align: center;
+}
+
+.ts-modal-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+
+.ts-modal-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+.ts-modal-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ts-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ts-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #d4d4d8;
+}
+
+.ts-input {
+  background: #0d0d10;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #ffffff;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.ts-input:focus {
+  border-color: #3f3f46;
+}
+
+.ts-input::placeholder {
+  color: var(--text-dim);
+}
+
+.ts-btn-modal-signin {
+  background: var(--apple-blue);
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: opacity 0.15s ease;
+}
+
+.ts-btn-modal-signin:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.ts-btn-modal-demo {
+  background: transparent;
+  border: 1px solid #27272a;
+  color: #f4f4f5;
+  border-radius: 9999px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.15s ease;
+}
+
+.ts-btn-modal-demo:hover {
+  background: #18181b;
+  border-color: #3f3f46;
+}
+
+.ts-modal-footer {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 24px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  .ts-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── PASSED VERDICT & EMPTY STATE UTILITIES ─── */
+.ts-verdict-badge.passed {
+  background: rgba(161, 161, 170, 0.1);
+  border: 1px solid rgba(161, 161, 170, 0.25);
+  color: #a1a1aa;
+}
+
+.ts-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.ts-empty-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-rim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  color: var(--text-secondary);
+}
+
+.ts-empty-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.ts-empty-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.ts-bot-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(0, 113, 227, 0.12);
+  border: 1px solid rgba(0, 113, 227, 0.3);
+  color: #38bdf8;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.ts-bot-badge.online {
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+  color: var(--emerald-green);
+}
+
+.ts-bot-badge.offline {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--coral-red);
+}
+
+.ts-telegram-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.ts-telegram-badge.active {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.35);
+  color: #22c55e;
+}
+
+.ts-telegram-badge.standby {
+  background: rgba(0, 113, 227, 0.12);
+  border-color: rgba(0, 113, 227, 0.35);
+  color: #38bdf8;
+}
+
+.ts-telegram-badge:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.15);
+}
+
+/* ─── SENTINEL GARAK ATTACKER & VULNERABILITY AUDITOR ─── */
+.ts-garak-audit-box {
+  background: #121215;
+  border: 1px solid var(--border-rim);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ts-audit-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ts-audit-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ts-audit-main-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ts-audit-target-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.ts-audit-target-sub code {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: ui-monospace, monospace;
+}
+
+.ts-audit-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ts-btn-audit-launch {
+  background: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  color: #ffffff;
+  border: 1px solid rgba(225, 29, 72, 0.4);
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(225, 29, 72, 0.25);
+  transition: all 0.2s ease;
+}
+
+.ts-btn-audit-launch:hover:not(:disabled) {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  transform: translateY(-1px);
+}
+
+.ts-btn-audit-launch:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.ts-btn-audit-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-rim);
+  color: var(--text-secondary);
+  border-radius: 9999px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ts-btn-audit-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Scanner Terminal */
+.ts-scan-terminal {
+  background: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.ts-terminal-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ts-term-prefix {
+  color: #e11d48;
+  font-weight: 700;
+}
+
+.ts-term-info {
+  color: #94a3b8;
+}
+
+.ts-term-blocked {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.ts-term-leaked {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+/* Progress bar */
+.ts-scan-progress-wrap {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.ts-scan-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #e11d48, #22c55e);
+  transition: width 0.3s ease;
+}
+
+/* Vulnerabilities Grid */
+.ts-vuln-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.ts-vuln-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 16px;
+}
+
+.ts-vuln-card {
+  background: #18181b;
+  border: 1px solid var(--border-rim);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s ease;
+}
+
+.ts-vuln-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.ts-vuln-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ts-vuln-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.ts-vuln-owasp {
+  font-size: 11px;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 4px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.ts-vuln-status-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+.ts-vuln-status-pill.blocked {
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #22c55e;
+}
+
+.ts-vuln-status-pill.leaked {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+}
+
+.ts-vuln-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.ts-vuln-payload-box {
+  background: #0d0d10;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  color: #e4e4e7;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.ts-vuln-evidence {
+  font-size: 11px;
+  color: #a1a1aa;
+}
+
+.ts-vuln-remediation {
+  background: rgba(0, 113, 227, 0.08);
+  border-left: 3px solid #0071e3;
+  padding: 8px 12px;
+  border-radius: 0 6px 6px 0;
+  font-size: 11px;
+  color: #93c5fd;
+  line-height: 1.4;
+}
+
+

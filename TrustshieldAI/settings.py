@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 from pathlib import Path
 import os
 import environ
+from corsheaders.defaults import default_headers
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,17 +34,22 @@ DEBUG = env('DEBUG')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*', 'localhost', '127.0.0.1', 'testserver'])
+
+# ─── TELEGRAM NOTIFICATIONS (ONE-TIME PERSISTENT CONFIG) ─────────────────────
+TELEGRAM_BOT_TOKEN = env('TELEGRAM_BOT_TOKEN', default='')
+TELEGRAM_CHAT_ID = env('TELEGRAM_CHAT_ID', default='')
+TELEGRAM_ALERTS_ENABLED = env.bool('TELEGRAM_ALERTS_ENABLED', default=True)
+
 # settings.py
 
-# Load allowed frontend origins from environment variables as a list
-CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
-    'http://localhost:3000',      # React/Next.js default local port
-    'http://127.0.0.1:3000',
-])
-
-# If your frontend needs to send cookies/tokens over cross-site requests
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'x-api-key',
+    'x-requested-with',
+]
 
 
 
@@ -56,10 +63,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app1',
+    
+    'shield',
+    'security',
     'rest_framework',
     'corsheaders',
 ]
+
+# ── DRF defaults ──────────────────────────────────────────────────────────────
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
+
+# ── TrustShield settings ─────────────────────────────────────────────────────
+TRUSTSHIELD_DEFAULT_API_KEY = env('TRUSTSHIELD_API_KEY', default='ts-dev-key-123')
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -94,10 +114,36 @@ WSGI_APPLICATION = 'TrustshieldAI.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
-# Database Configuration
-DATABASES = {
-    'default': env.db('DATABASE_URL'),
-}
+# Uses DATABASE_URL from .env (Neon PostgreSQL).
+# Falls back to local SQLite if DATABASE_URL is unreachable or DNS fails.
+import socket
+from urllib.parse import urlparse
+
+raw_db_url = env('DATABASE_URL', default=f'sqlite:///{BASE_DIR / "db.sqlite3"}')
+use_sqlite = False
+
+if not raw_db_url or raw_db_url.startswith('sqlite'):
+    use_sqlite = True
+else:
+    try:
+        parsed_db = urlparse(raw_db_url)
+        db_host = parsed_db.hostname
+        if db_host:
+            socket.getaddrinfo(db_host, parsed_db.port or 5432, socket.AF_UNSPEC, socket.SOCK_STREAM)
+    except Exception:
+        use_sqlite = True
+
+if use_sqlite:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': env.db('DATABASE_URL'),
+    }
 
 
 # Password validation
